@@ -1,11 +1,11 @@
 const express = require('express'); //express here is function
-const bodyParser = require('body-parser'); //middleware
+const bodyParser = require('body-parser'); //middleware for parsing
 
-const placesRouter = require('./routes/places-routes')
+const placesRouter = require('./routes/places-routes') //imported from routes folder
 
 const app = express();
 
-app.use(placesRouter)
+app.use('/api/places',placesRouter) ; // => /api/places...
 
 
 
