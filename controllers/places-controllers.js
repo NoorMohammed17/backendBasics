@@ -110,6 +110,26 @@ const createPlace = (req,res,next) => {
 
 }
 
+const updatePlace = (req,res,next) => {
+  const {title,description} = req.body; //only changing the title and description here
+  const placeId = req.params.pid; // to get the id
+  const updatedPlace = {...DUMMY_PLACES.find(p => p.id === placeId)}
+//here spread operator is used to not directly change the fileds
+
+const placeIndex = DUMMY_PLACES.findIndex(p => p.id === placeId);
+updatedPlace.title = title;
+updatedPlace.description=description;
+
+DUMMY_PLACES[placeIndex] = updatedPlace;
+res.status(200).json({place:updatedPlace})
+}
+
+const deletePlace = (req,res,next) => {
+
+}
+
+
+
 exports.getPlaces= getPlaces;
 
 exports.getPlaceById = getPlaceById; // here we need to just point to funtion and express will execute on behalf of us
@@ -117,3 +137,7 @@ exports.getPlaceById = getPlaceById; // here we need to just point to funtion an
 exports.getPlaceByUserId = getPlaceByUserId;
 
 exports.createPlace = createPlace;
+
+exports.updatePlace = updatePlace;
+
+exports.deletePlace = deletePlace;
