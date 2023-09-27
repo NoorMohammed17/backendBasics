@@ -1,4 +1,4 @@
-
+const uuid = require('uuid').v4;
 const DUMMY_USERS = [
     {
       id: "1",
@@ -41,6 +41,16 @@ const getUsers = (req,res,next) => {
 };
 
 const signup = (req,res,next) => {
+    const {name,email,password} = req.body;
+
+    const newUser = {
+        id:uuid(),
+        name,
+        email,
+        password,
+    }
+    DUMMY_USERS.push(newUser);
+    res.status(201).json({message:'New user created.'})
     
 };
 
