@@ -11,7 +11,7 @@ router.get("/", placeControllers.getPlaces)
 
 router.get("/:pid", placeControllers.getPlaceById);
 
-router.get("/user/:uid", placeControllers.getPlaceByUserId);
+router.get("/user/:uid", placeControllers.getPlacesByUserId);
 
 router.post('/',placeControllers.createPlace);
 

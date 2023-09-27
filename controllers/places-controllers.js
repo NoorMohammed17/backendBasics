@@ -67,7 +67,7 @@ const getPlaceById = (req, res, next) => {
 const getPlacesByUserId = (req, res, next) => {
   const userId = req.params.uid;
   const places = DUMMY_PLACES.filter((p) => {
-    return p.creator === userId;
+    return p.creator.id === userId;
   });
   if (!places) {
     return next(
@@ -113,7 +113,7 @@ const deletePlace = (req, res, next) => {
 
 exports.getPlaces = getPlaces;
 exports.getPlaceById = getPlaceById; // here we need to just point to funtion and express will execute on behalf of us
-exports.getPlaceByUserId = getPlaceByUserId;
+exports.getPlacesByUserId = getPlacesByUserId;
 exports.createPlace = createPlace;
 exports.updatePlace = updatePlace;
 exports.deletePlace = deletePlace;
