@@ -28,12 +28,17 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || "An unkonwn error occurred!" });
 });
 
+// app.listen(5000)
+
 
 // const MONGO_URL = `mongodb+srv://noor_mernapp:N00rmernapp@cluster0.kwms7cp.mongodb.net/Places?retryWrites=true&w=majority`;
+//mongodb+srv://<username>:<password>@cluster0.kwms7cp.mongodb.net/?retryWrites=true&w=majority
+
 
 mongoose
-  .connect('mongodb+srv://noor_mernapp:N00rmernapp@cluster0.kwms7cp.mongodb.net/Places?retryWrites=true&w=majority')
+  .connect(`mongodb+srv://noorshaik1798:noor123@cluster0.kwms7cp.mongodb.net/PlaceData?retryWrites=true&w=majority`)
   .then(() => {
     app.listen(5000);
+    console.log('connected')
   })
   .catch((err) => console.log(err));

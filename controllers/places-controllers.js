@@ -88,9 +88,8 @@ const createPlace = async(req, res, next) => {
       new HttpError('Invalid inputs passed, please check your data.', 422)
     );
   }
-  const { title, address, coordinates, description, creator } = req.body;
-  //in req.body we have the objects
-  //title=req.body.title (the above is de-structured)
+  const { title, description, address,coordinates, creator } = req.body;
+  // const title = req.body.title;
   const createdPlace = new Place({
     title,
     description,
