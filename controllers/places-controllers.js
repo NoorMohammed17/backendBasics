@@ -150,7 +150,7 @@ const createPlace = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(201).json({ place: createdPlace });
+  res.status(201).json({ place: createdPlace.toObject({ getters: true })});
 };
 
 const updatePlace = async (req, res, next) => {
@@ -196,13 +196,40 @@ const updatePlace = async (req, res, next) => {
   res.status(200).json( {updatedPlace: updatedPlace.toObject({ getters: true })});
 };
 
-const deletePlace = (req, res, next) => {
+const deletePlace = async(req, res, next) => {
   const placeId = req.params.pid;
-  if (!DUMMY_PLACES.find((p) => p.id === placeId)) {
-    throw new HttpError("Could not find a place for that id.", 404);
+
+  //using Node .js code
+  // if (!DUMMY_PLACES.find((p) => p.id === placeId)) {
+  //   throw new HttpError("Could not find a place for that id.", 404);
+  // }
+  // DUMMY_PLACES = DUMMY_PLACES.filter((p) => p.id !== placeId);
+  // res.status(200).json({ message: `Deleted place with id ${placeId}` });
+
+
+  //using Mongodb code
+  let place;
+  try{
+    place= await Place.findById(placeId);
   }
-  DUMMY_PLACES = DUMMY_PLACES.filter((p) => p.id !== placeId);
+  catch(err){
+    const error = new HttpError(
+      "Something went wrong, could not  delete place",
+      500
+    );
+    return next(error);
+  }
+  try {
+    await place.remove();
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not  delete place",
+      500
+    );
+    return next(error);
+  }
   res.status(200).json({ message: `Deleted place with id ${placeId}` });
+
 };
 
 exports.getPlaces = getPlaces;
