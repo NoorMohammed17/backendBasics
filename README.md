@@ -3,7 +3,9 @@ basics of backend MERN
 
 ## Tech Stack used :-
 1) REST API
-2) MongoDB
+2) MongoDB -Mongoose
+3) Node.js
+4) Express.js
 
 We can learn how to route the API's (REST API'S)
 ## REST API :-
